@@ -10,33 +10,32 @@ import kotlin.time.measureTime
 const val COUNT_TEST = 5
 const val ARRAY_SIZE = 100_000_000 // -Xmx8192m is required
 const val QUICK_SORT_BLOCK_SIZE = 3_000
-const val N2_SORT_BLOCK_SIZE = 12
 
 val formatter = { it: Any -> DecimalFormat("0.000").format(it) }
 
 fun main() {
     val seqSorter = SequenceQuickSorter()
     val parFilteredSorter = ParallelFilteredQuickSorter(QUICK_SORT_BLOCK_SIZE)
-    val parForkJoinSorter = ParallelForkJoinQuickSorter(QUICK_SORT_BLOCK_SIZE, N2_SORT_BLOCK_SIZE)
+    val parForkJoinSorter = ParallelForkJoinQuickSorter(QUICK_SORT_BLOCK_SIZE)
 
+    println("The warming up has started... | now = ${LocalTime.now().truncatedTo(ChronoUnit.SECONDS)}")
+    warmingUp(seqSorter, IntArray(ARRAY_SIZE) { Random.nextInt() })
+    warmingUp(parFilteredSorter, IntArray(ARRAY_SIZE) { Random.nextInt() })
+    warmingUp(parForkJoinSorter, IntArray(ARRAY_SIZE) { Random.nextInt() })
+    println("The warming up has finished   | now = ${LocalTime.now().truncatedTo(ChronoUnit.SECONDS)}")
+    
     val times = Array(COUNT_TEST) { index ->
         println("Generation of input[$index] with size = $ARRAY_SIZE started... | now = ${LocalTime.now().truncatedTo(ChronoUnit.SECONDS)}")
         val inputData = IntArray(ARRAY_SIZE) { Random.nextInt() }
         println("Generation of input[$index] with size = $ARRAY_SIZE finished   | now = ${LocalTime.now().truncatedTo(ChronoUnit.SECONDS)}")
 
-        if (index == 0) {
-            warmingUp(seqSorter, IntArray(ARRAY_SIZE) { Random.nextInt() })
-            warmingUp(parFilteredSorter, IntArray(ARRAY_SIZE) { Random.nextInt() })
-            warmingUp(parForkJoinSorter, IntArray(ARRAY_SIZE) { Random.nextInt() })
-        }
-
-        println("Sortings of input[$index] with size = $ARRAY_SIZE started... | now = ${LocalTime.now().truncatedTo(ChronoUnit.SECONDS)}")
+        println("Sorting of input[$index] with size = $ARRAY_SIZE started... | now = ${LocalTime.now().truncatedTo(ChronoUnit.SECONDS)}")
         val sortingResult = Triple(
             measureTimeAndSortingCheck(seqSorter, inputData.copyOf(), index).toDouble(DurationUnit.SECONDS),
             measureTimeAndSortingCheck(parFilteredSorter, inputData.copyOf(), index).toDouble(DurationUnit.SECONDS),
             measureTimeAndSortingCheck(parForkJoinSorter, inputData.copyOf(), index).toDouble(DurationUnit.SECONDS),
         )
-        println("Sortings of input[$index] with size = $ARRAY_SIZE finished   | now = ${LocalTime.now().truncatedTo(ChronoUnit.SECONDS)}\n")
+        println("Sorting of input[$index] with size = $ARRAY_SIZE finished   | now = ${LocalTime.now().truncatedTo(ChronoUnit.SECONDS)}\n")
 
         sortingResult
     }

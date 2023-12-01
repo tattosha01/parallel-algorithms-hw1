@@ -5,12 +5,6 @@ class SequenceQuickSorter : Sorter() {
         l: Int,
         r: Int,
     ) {
-        if (r <= l) {
-            return
-        }
-
-        val m = partition(this, l, r, Random::nextInt)
-        sort(l, m)
-        sort(m + 1, r)
+        seqSort(this, l, r, Random::nextInt)
     }
 }

@@ -3,7 +3,6 @@ import java.util.concurrent.ThreadLocalRandom
 
 class ParallelForkJoinQuickSorter(
     private val quickSortBlockSize: Int,
-    private val localBlockSize: Int,
 ) : Sorter() {
     private inline val randomNextInt: (Int, Int) -> Int
         get() = ThreadLocalRandom.current()::nextInt
@@ -24,7 +23,7 @@ class ParallelForkJoinQuickSorter(
     ) {
         if (r <= l) return
         if (r - l < quickSortBlockSize) {
-            seqSort(a, l, r)
+            seqSort(a, l, r, randomNextInt)
             return
         }
 
@@ -33,32 +32,5 @@ class ParallelForkJoinQuickSorter(
             f1 = { psort(a, l, m) },
             f2 = { psort(a, m + 1, r) }
         )
-    }
-
-    private fun seqSort(
-        a: IntArray,
-        l: Int = 0,
-        r: Int = a.size - 1,
-    ) {
-        if (r - l < localBlockSize) {
-            var i = 0
-            var isSorted = false
-            while (!isSorted) {
-                isSorted = true
-                for (j in l..(r - 1 - i)) {
-                    if (a[j] > a[j + 1]) {
-                        swap(a, j, j + 1)
-                        isSorted = false
-                    }
-                }
-                i++
-            }
-
-            return
-        }
-
-        val m = partition(a, l, r, randomNextInt)
-        seqSort(a, l, m)
-        seqSort(a, m + 1, r)
     }
 }

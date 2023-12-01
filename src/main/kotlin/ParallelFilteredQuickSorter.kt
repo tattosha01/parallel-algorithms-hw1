@@ -23,7 +23,7 @@ class ParallelFilteredQuickSorter(
     ) {
         if (r <= l) return
         if (r - l < quickSortBlockSize) {
-            seqSort(a, l, r)
+            seqSort(a, l, r, randomNextInt)
             return
         }
 
@@ -36,35 +36,20 @@ class ParallelFilteredQuickSorter(
             val rightDeferred = async {
                 pfilter(a, l, r) { i -> a[i] >= x  }
             }
-
-            val left = leftDeferred.await()
-            val right = rightDeferred.await()
-
+            
             val sortingLeft = async {
+                val left = leftDeferred.await()
                 psort(left)
                 System.arraycopy(left, 0, a, 0, left.size)
             }
             val sortingRight = async {
+                val right = rightDeferred.await()
                 psort(right)
-                System.arraycopy(right, 0, a, left.size, right.size)
+                System.arraycopy(right, 0, a, r - l + 1 - right.size, right.size)
             }
 
             sortingLeft.await()
             sortingRight.await()
         }
-    }
-
-    private fun seqSort(
-        a: IntArray,
-        l: Int,
-        r: Int,
-    ) {
-        if (r <= l) {
-            return
-        }
-
-        val m = partition(a, l, r, randomNextInt)
-        seqSort(a, l, m)
-        seqSort(a, m + 1, r)
     }
 }

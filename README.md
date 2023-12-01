@@ -13,38 +13,39 @@ Quicksort.
 
 Результаты тестирования:
 
-Generation of input[0] with size = 100000000 started... | now = 19:18:48<br/>
-Generation of input[0] with size = 100000000 finished   | now = 19:18:48<br/>
-Sortings of input[0] with size = 100000000 started... | now = 19:20:33<br/>
-Sortings of input[0] with size = 100000000 finished   | now = 19:22:29<br/>
+The warming up has started... | now = 23:48:08<br/>
+The warming up has finished   | now = 23:50:06<br/>
+Generation of input[0] with size = 100000000 started... | now = 23:50:06<br/>
+Generation of input[0] with size = 100000000 finished   | now = 23:50:06<br/>
+Sorting of input[0] with size = 100000000 started... | now = 23:50:06<br/>
+Sorting of input[0] with size = 100000000 finished   | now = 23:51:44<br/>
 
-Generation of input[1] with size = 100000000 started... | now = 19:22:29<br/>
-Generation of input[1] with size = 100000000 finished   | now = 19:22:29<br/>
-Sortings of input[1] with size = 100000000 started... | now = 19:22:29<br/>
-Sortings of input[1] with size = 100000000 finished   | now = 19:24:15<br/>
+Generation of input[1] with size = 100000000 started... | now = 23:51:44<br/>
+Generation of input[1] with size = 100000000 finished   | now = 23:51:44<br/>
+Sorting of input[1] with size = 100000000 started... | now = 23:51:44<br/>
+Sorting of input[1] with size = 100000000 finished   | now = 23:53:19<br/>
 
-Generation of input[2] with size = 100000000 started... | now = 19:24:15<br/>
-Generation of input[2] with size = 100000000 finished   | now = 19:24:15<br/>
-Sortings of input[2] with size = 100000000 started... | now = 19:24:15<br/>
-Sortings of input[2] with size = 100000000 finished   | now = 19:26:11<br/>
+Generation of input[2] with size = 100000000 started... | now = 23:53:19<br/>
+Generation of input[2] with size = 100000000 finished   | now = 23:53:19<br/>
+Sorting of input[2] with size = 100000000 started... | now = 23:53:19<br/>
+Sorting of input[2] with size = 100000000 finished   | now = 23:54:53<br/>
 
-Generation of input[3] with size = 100000000 started... | now = 19:26:11<br/>
-Generation of input[3] with size = 100000000 finished   | now = 19:26:12<br/>
-Sortings of input[3] with size = 100000000 started... | now = 19:26:12<br/>
-Sortings of input[3] with size = 100000000 finished   | now = 19:27:51<br/>
+Generation of input[3] with size = 100000000 started... | now = 23:54:53<br/>
+Generation of input[3] with size = 100000000 finished   | now = 23:54:53<br/>
+Sorting of input[3] with size = 100000000 started... | now = 23:54:53<br/>
+Sorting of input[3] with size = 100000000 finished   | now = 23:56:25<br/>
 
-Generation of input[4] with size = 100000000 started... | now = 19:27:51<br/>
-Generation of input[4] with size = 100000000 finished   | now = 19:27:51<br/>
-Sortings of input[4] with size = 100000000 started... | now = 19:27:51<br/>
-Sortings of input[4] with size = 100000000 finished   | now = 19:29:38<br/>
+Generation of input[4] with size = 100000000 started... | now = 23:56:25<br/>
+Generation of input[4] with size = 100000000 finished   | now = 23:56:25<br/>
+Sorting of input[4] with size = 100000000 started... | now = 23:56:25<br/>
+Sorting of input[4] with size = 100000000 finished   | now = 23:57:58<br/>
 
 Sequence | ParallelByFilter | ParallelBySeqAndForkJoin<br/>
-11.852s  | 98.873s          | 3.553s<br/>
-11.719s  | 88.915s          | 3.605s<br/>
-11.829s  | 99.855s          | 3.402s<br/>
-11.785s  | 82.907s          | 3.429s<br/>
-12.096s  | 89.019s          | 3.989s<br/>
-
-avg time (sequence) = 11.856s<br/>
-avg time (filtered) = 91.914s<br/>
-avg time (forkJoin) = 3.595s<br/>
+10.609s  | 81.887s          | 3.234s<br/>
+10.274s  | 80.200s          | 3.189s<br/>
+10.079s  | 79.618s          | 3.349s<br/>
+10.250s  | 77.290s          | 3.303s<br/>
+10.343s  | 78.586s          | 3.344s<br/>
+avg time (sequence) = 10.311s<br/>
+avg time (filtered) = 79.516s<br/>
+avg time (forkJoin) = 3.284s<br/>
